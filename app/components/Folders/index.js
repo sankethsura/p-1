@@ -1,16 +1,17 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Draggable from "react-draggable";
 import FoldersIcon from "./foldersIcon";
 import NameTheFolder from "./nameTheFolder";
+import { PopupHandlerContext } from "@/app/context/popups/popup-context";
 
 export default function Index() {
   const [positions, setPositions] = useState({
-    folder1: { x: 50, y: 50 }
+    folder1: { x: 50, y: 50 },
   });
 
-  const gridSize = 70; //add calculations later
+  const gridSize = 50; //add calculations later
 
   const handleStop = (e, data, id) => {
     setPositions((prev) => ({
@@ -21,6 +22,9 @@ export default function Index() {
       },
     }));
   };
+
+  const {dispatch} = useContext(PopupHandlerContext);
+
   return (
     <div>
       {" "}
@@ -31,6 +35,9 @@ export default function Index() {
       >
         <div
           className="absolute cursor-pointer flex flex-col items-center"
+          onClick={() => {
+            dispatch({ type: "SHOW_POPUP_1" });
+          }}
           // compose the folder icons and name structure later
         >
           <FoldersIcon />
