@@ -6,6 +6,8 @@ import SmallModal from "../Modal/PopupStructre-1";
 import FoldersIcon from "./foldersIcon";
 import NameTheFolder from "./nameTheFolder";
 import { usePopupStore } from "@/Zustand/popupStore";
+import { ContextMenu, ContextMenuContent, ContextMenuTrigger } from "../UI/ContextMenu";
+import { ContextMenuItem } from "@radix-ui/react-context-menu";
 
 export default function Index() {
   const [allFolderItems, setAllFolderItems] = useState([
@@ -28,7 +30,7 @@ export default function Index() {
       open: false,
     },
     {
-      id: 3,
+      id: 4,
       name: "Experience",
       position: { x: 0, y: 300 },
       open: false,
@@ -77,22 +79,36 @@ export default function Index() {
               removePopup(item.id);
             }}
           />
-          <Draggable
-            key={item.id}
-            defaultPosition={item.position}
-            position={item.position}
-            onStop={(e, data) => handleStop(e, data, item.id)}
-          >
-            <div
-              onClick={() => {
-                addPopup(item.id);
-              }}
-              className="absolute cursor-pointer flex flex-col items-center"
-            >
-              <FoldersIcon />
-              <NameTheFolder folderName={item.name} />
-            </div>
-          </Draggable>
+          <ContextMenu>
+            <ContextMenuTrigger>
+              <Draggable
+                key={item.id}
+                defaultPosition={item.position}
+                position={item.position}
+                onStop={(e, data) => handleStop(e, data, item.id)}
+              >
+                <div
+                  onDoubleClick={() => {
+                    addPopup(item.id);
+                  }}
+                  className="absolute cursor-pointer flex flex-col items-center"
+                >
+                  <FoldersIcon />
+                  <NameTheFolder folderName={item.name} />
+                </div>
+              </Draggable>
+            </ContextMenuTrigger>
+            <ContextMenuContent>
+              <ContextMenuItem
+                className="px-4 py-2 cursor-pointer rounded text-sm text-black border-0 ring-0 outline-none hover:bg-gray-100"
+                onSelect={() => {
+                  addPopup(item.id);
+                }}
+              >
+                Open
+              </ContextMenuItem>
+            </ContextMenuContent>
+          </ContextMenu>
         </div>
       ))}
     </div>

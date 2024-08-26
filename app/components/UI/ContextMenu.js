@@ -39,7 +39,7 @@ const ContextMenuItem = React.forwardRef(({ className, ...props }, ref) => (
   <ContextMenuPrimitive.Item
     ref={ref}
     className={twMerge(
-      "px-4 py-2 cursor-pointer rounded text-sm text-gray-800 hover:bg-violet-50 hover:text-black",
+      "px-4 py-2 cursor-pointer rounded text-sm text-black border-0 ring-0 outline-none",
       className
     )}
     {...props}

@@ -42,13 +42,15 @@ const DialogContent = React.forwardRef(({ className, ...props }, ref) => (
     <DialogPrimitive.Content
       ref={ref}
       className={twMerge(
-        "fixed inset-0 z-50 flex items-center justify-center p-4",
+        "fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-50 p-4",
         className
       )}
       {...props}
     />
   </DialogPortal>
 ));
+
+
 DialogContent.displayName = DialogPrimitive.Content.displayName;
 
 const DialogHeader = ({ className, ...props }) => (
