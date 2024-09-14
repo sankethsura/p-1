@@ -1,11 +1,11 @@
-import BgImage from "./components/BackgroundImage.js/bgImage";
-import Folders from "./components/Folders";
+import Design1 from "./components/layouts/design1";
+import Design2 from "./components/layouts/design2";
 
 export default function Desktop() {
   return (
-    <div className="h-screen w-full bg-gray-100 relative p-8">
-      <BgImage />
-      <Folders />
+    <div className="w-[100vw] h-[100vh] bg-white overflow-hidden">
+      {/* <Design1 /> */}
+      <Design2 />
     </div>
   );
 }
