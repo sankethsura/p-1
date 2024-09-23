@@ -7,7 +7,8 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/UI/**/*.{js,ts,jsx,tsx,mdx}",
-    "./app/components/**/*.{js,ts,jsx,tsx,mdx}"
+    "./app/components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./app/components/Content/Skills.js"
   ],
   theme: {
     extend: {
@@ -36,8 +37,21 @@ module.exports = {
       greenText: "#1D7656",
       redText: "#F04261",
 
-      brownPrimary: "#3C3D37",
+      brownPrimary: "#252522",
       ...colors,
+    },
+    screens: {
+      smr: { min: "320px", max: "767px" },
+      sm: { min: "320px" },
+      mdr: { min: "768px", max: "1023px" },
+      md: { min: "768px" },
+      lgr: { min: "1024px", max: "1279px" },
+      lg: { min: "1024px" },
+      xlr: { min: "1280px", max: "1535px" },
+      xl: { min: "1280px" },
+      "2xlr": { min: "1536px", max: "9535px" },
+      "2xl": { min: "1536px" },
+      custom1: { min: "1400px" },
     },
   },
   plugins: [],
