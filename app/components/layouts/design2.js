@@ -7,6 +7,7 @@ import Resume from "../Content/Resume";
 import useMoveableHelper from "../CustomHooks.js/useMoveableHelper";
 import Skills from "../Content/Skills";
 import Experience from "../Content/Experience";
+import { useThemeStore } from "@/Zustand/themeStore";
 
 export default function Design2() {
   const size = {
@@ -44,11 +45,18 @@ export default function Design2() {
     setHoveredId(null);
   };
 
-  const getClassNames = (id, baseWidth, baseHeight, cornerClasses = "", additionalClass = "", roundedClasses) => {
+  const getClassNames = (
+    id,
+    baseWidth,
+    baseHeight,
+    cornerClasses = "",
+    additionalClass = "",
+    roundedClasses
+  ) => {
     if (selectedId) {
       // If an element is selected
       return selectedId === id
-        ? `w-[90vw] h-[90vh] bg-black duration-300 ${additionalClass} ${roundedClasses}` // Enlarge selected element
+        ? `w-[90vw] h-[90vh] duration-300 ${additionalClass} ${roundedClasses}` // Enlarge selected element
         : "hidden"; // Hide non-selected elements
     }
 
@@ -57,7 +65,7 @@ export default function Design2() {
     const width = isHovered ? 280 : baseWidth;
     const height = isHovered ? 130 : baseHeight;
 
-    return `w-[${width}px] h-[${height}px] bg-black ${cornerClasses} duration-300 ${additionalClass} ${
+    return `w-[${width}px] h-[${height}px] ${cornerClasses} duration-300 ${additionalClass} ${
       hoveredId ? "delay-0" : ""
     }`;
   };
@@ -65,9 +73,17 @@ export default function Design2() {
   const state = selectedId ? "selected" : hoveredId ? "hovered" : "normal";
 
   const { stepCss } = useMoveableHelper();
+  const { theme, setTheme } = useThemeStore();
 
   return (
     <div className="w-full h-full relative items-center justify-center flex flex-col gap-5 bg-[#D5DFC4]/70 overflow-hidden">
+      <div
+        className="absolute top-5 right-5 w-[50px] h-[50px] border border-white z-[50] hover:bg-white duration-500 cursor-pointer"
+        onClick={() => {
+          setTheme(theme === "neomorphic" ? "default" : "neomorphic");
+          // console.log("clicked");
+        }}
+      />
       <div className="opacity-50">
         <img src="/1.png" className="absolute top-0 right-1/2 opacity-5 w-[100vh]" />
         <img src="/1.png" className="absolute top-0 left-1/2 opacity-5 w-[100vh] rotate-180" />
@@ -82,7 +98,7 @@ export default function Design2() {
         <p className="text-lg font-semibold text-brownPrimary">Full stack developer</p>
       </main>
 
-      <main className="flex gap-5 items-end z-[10]">
+      <main className="flex gap-5 items-end z-[10] smr:flex-col">
         {/* Left */}
         <section className="flex gap-5">
           {/* part1 */}
@@ -94,7 +110,7 @@ export default function Design2() {
                 size.width,
                 size.height,
                 `rounded-[${rounded}px] rounded-br-none cursor-pointer ${
-                  animationStep ? "" : "-translate-x-12 opacity-0 ease-in-out"
+                  animationStep ? "" : "-translate-y-[10vh] opacity-0 ease-in-out"
                 }`
               )}
               // onClick={() => handleSelect("table1")}
@@ -110,7 +126,7 @@ export default function Design2() {
                 size.width,
                 size.height,
                 `rounded-[${rounded}px] rounded-tr-none ${
-                  animationStep ? "delay-[200ms]" : " translate-y-12 opacity-0 ease-in-out"
+                  animationStep ? "delay-[200ms]" : " -translate-y-[10vh] opacity-0 ease-in-out"
                 }`
               )}
               onClick={() => handleSelect("table2")}
@@ -140,7 +156,7 @@ export default function Design2() {
                 "table4",
                 size.width,
                 size.height,
-                `rounded-[${rounded}px] cursor-pointer ${stepCss}`
+                `rounded-[${rounded}px] cursor-pointer ${stepCss} `
               )}`}
               type={2} // Ensure the prop is passed correctly
               onClick={(e) => {
@@ -166,7 +182,7 @@ export default function Design2() {
               size.largeWidth,
               size.height,
               `rounded-[${rounded}px] rounded-bl-none cursor-pointer ${
-                animationStep ? "delay-100" : " -translate-y-12 opacity-0 ease-in-out"
+                animationStep ? "delay-100" : " -translate-y-[10vh] opacity-0 ease-in-out"
               }`,
               ``,
               `rounded-r-[80px]`
@@ -187,7 +203,7 @@ export default function Design2() {
                 size.width,
                 size.height,
                 `rounded-[${rounded}px] rounded-br-none rounded-tl-none ${
-                  animationStep ? "delay-[300ms]" : " translate-x-12 opacity-0 ease-in-out"
+                  animationStep ? "delay-[300ms]" : " -translate-y-[10vh] opacity-0 ease-in-out"
                 }`
               )}
               onClick={() => handleSelect("table6")}
@@ -201,7 +217,7 @@ export default function Design2() {
                 size.width,
                 size.height,
                 `rounded-[${rounded}px] rounded-bl-none cursor-pointer ${
-                  animationStep ? "delay-[200ms]" : " translate-x-12 opacity-0 ease-in-out"
+                  animationStep ? "delay-[200ms]" : " -translate-y-[10vh] opacity-0 ease-in-out"
                 }`,
                 ``,
                 `rounded-tr-[160px]`
@@ -224,8 +240,8 @@ export default function Design2() {
             "table8",
             size.width,
             size.height,
-            `rounded-[${rounded}px] rounded-tr-none ${
-              animationStep ? "delay-[100ms]" : " translate-y-12 opacity-0 ease-in-out"
+            `rounded-[${rounded}px] rounded-tr-none smr:hidden ${
+              animationStep ? "delay-[100ms]" : " -translate-y-[10vh] opacity-0 ease-in-out"
             }`
           )}
           onClick={() => handleSelect("table8")}
@@ -241,7 +257,7 @@ export default function Design2() {
             size.largeWidth,
             size.height,
             `rounded-[${rounded}px] rounded-tr-none cursor-pointer ${
-              animationStep ? "delay-[200ms]" : " translate-y-12 opacity-0 ease-in-out"
+              animationStep ? "delay-[200ms]" : "-translate-y-[10vh] opacity-0 ease-in-out"
             }`
           )}
           onClick={() => handleSelect("table9")}
@@ -258,8 +274,8 @@ export default function Design2() {
             "table10",
             size.width,
             size.height,
-            `rounded-[${rounded}px] rounded-tl-none ${
-              animationStep ? "delay-[400ms]" : " translate-x-12 opacity-0 ease-in-out"
+            `rounded-[${rounded}px] rounded-tl-none smr:hidden ${
+              animationStep ? "delay-[400ms]" : "-translate-y-[10vh] opacity-0 ease-in-out"
             }`
           )}
           onClick={() => handleSelect("table10")}
